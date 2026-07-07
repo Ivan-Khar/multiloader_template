@@ -1,7 +1,7 @@
 package one.theaq.template.platform;
 
 //? if fabric {
-/*import net.fabricmc.loader.api.FabricLoader;
+import net.fabricmc.loader.api.FabricLoader;
 import java.nio.file.Path;
 
 public final class Platform {
@@ -17,9 +17,9 @@ public final class Platform {
         return FabricLoader.getInstance().getConfigDir().getParent().resolve(".template_debug");
     }
 }
-*///?} else if neoforge {
+//?} else if neoforge {
 
-import net.neoforged.fml.ModList;
+/*import net.neoforged.fml.ModList;
 import net.neoforged.fml.loading.LoadingModList;
 import net.neoforged.fml.loading.FMLLoader;
 
@@ -34,8 +34,8 @@ public final class Platform {
 		//? if >=1.21.10 {
 		LoadingModList loadingModList = FMLLoader.getCurrent().getLoadingModList();
 		//?} else {
-		/*LoadingModList loadingModList = LoadingModList.get();
-		*///?}
+		/^LoadingModList loadingModList = LoadingModList.get();
+		^///?}
 		if (loadingModList != null) {
 			return loadingModList.getModFileById(modId) != null;
 		}
@@ -51,13 +51,13 @@ public final class Platform {
 		return FMLLoader.getCurrent().getGameDir().resolve(".template_debug");
 	}
 	//?} else {
-	/*public static boolean isDev() {
+	/^public static boolean isDev() {
 		return !FMLLoader.isProduction();
 	}
 
 	public static Path getDebugDirectory() {
 		return FMLLoader.getGamePath().resolve(".template_debug");
 	}
-	*///?}
+	^///?}
 }
-//?}
+*///?}

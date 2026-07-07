@@ -2,7 +2,7 @@ package one.theaq.template.data;
 
 //? if fabric {
 
-/*import dev.kikugie.fletching_table.annotation.fabric.Entrypoint;
+import dev.kikugie.fletching_table.annotation.fabric.Entrypoint;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 
@@ -14,9 +14,9 @@ public final class TemplateDataGen implements DataGeneratorEntrypoint {
 	
 	}
 }
-*///?} else {
+//?} else {
 
-import one.theaq.template.Template;
+/*import one.theaq.template.Template;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
@@ -43,4 +43,4 @@ public final class TemplateDataGen {
 	//?}
 }
 
-//?}
+*///?}
