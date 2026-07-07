@@ -9,7 +9,7 @@ plugins {
   kotlin("jvm")
   id("template.common")
   id("fabric-loom")
-  id("com.google.devtools.ksp") version "2.2.0-2.0.2"
+  id("com.google.devtools.ksp") version "2.3.9"
   id("dev.kikugie.fletching-table.fabric") version "0.1.0-alpha.22"
   id("com.github.gmazzo.buildconfig") version "5.7.1"
 }

@@ -1,8 +1,9 @@
 
 plugins {
-    kotlin("jvm") version "2.2.0" apply false
+    kotlin("jvm") version "2.4.0" apply false
     id("dev.kikugie.stonecutter")
     id("fabric-loom") version "1.17-SNAPSHOT" apply false
+    id("net.fabricmc.fabric-loom") version "1.17-SNAPSHOT" apply false
     id("net.neoforged.moddev") version "2.0.141" apply false
 }
 

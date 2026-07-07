@@ -1,14 +1,13 @@
 @file:Suppress("UnstableApiUsage")
 
 import dev.kikugie.fletching_table.annotation.MixinEnvironment
-import org.gradle.kotlin.dsl.remapJar
 import template.utils.*
 
 plugins {
   kotlin("jvm")
   id("template.common")
-  id("fabric-loom")
-  id("com.google.devtools.ksp") version "2.2.0-2.0.2"
+  id("net.fabricmc.fabric-loom")
+  id("com.google.devtools.ksp") version "2.3.9"
   id("dev.kikugie.fletching-table.fabric") version "0.1.0-alpha.22"
   id("com.github.gmazzo.buildconfig") version "5.7.1"
 }
@@ -34,13 +33,14 @@ base.archivesName = "${mod("id")}-${mod("version")}+$minecraft-$loader"
 
 dependencies {
   minecraft("com.mojang:minecraft:$minecraft")
-  modImplementation("net.fabricmc:fabric-loader:0.19.3")
-  modImplementation("net.fabricmc.fabric-api:fabric-api:${deps("fabric_api")}")
+
+  implementation("net.fabricmc:fabric-loader:0.19.3")
+  implementation("net.fabricmc.fabric-api:fabric-api:${deps("fabric_api")}")
 
   remoteDepBuilder(project, fletchingTable::modrinth)
-    .dep("sodium") { modImplementation(it) }
+    .dep("sodium") { implementation(it) }
     .dep("iris") {
-      modRuntimeOnly(it)
+      runtimeOnly(it)
       runtimeOnly("org.antlr:antlr4-runtime:4.13.1")
       runtimeOnly("io.github.douira:glsl-transformer:2.0.1")
       runtimeOnly("org.anarres:jcpp:1.4.14")
@@ -54,7 +54,7 @@ java {
 }
 
 loom {
-  accessWidenerPath.set(rootProject.file("src/main/resources/$minecraft.accesswidener"))
+  accessWidenerPath.set(rootProject.file("src/main/resources/$minecraft.deobf.accesswidener"))
 
   fabricApi {
     configureDataGeneration {
@@ -117,12 +117,12 @@ fletchingTable {
 tasks {
   register<Copy>("buildAndCollect") {
     group = "build"
-    from(remapJar.map { it.archiveFile })
+    from(jar.map { it.archiveFile })
     into(rootProject.layout.buildDirectory.file("libs/${project.property("mod.version")}"))
     dependsOn("build")
   }
 
-  remapJar {
+  jar {
     dependsOn("runDatagen")
   }
 

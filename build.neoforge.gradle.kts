@@ -5,7 +5,7 @@ plugins {
   kotlin("jvm")
   id("net.neoforged.moddev")
   id("template.common")
-  id("com.google.devtools.ksp") version "2.2.0-2.0.2"
+  id("com.google.devtools.ksp") version "2.3.9"
   id("dev.kikugie.fletching-table.neoforge") version "0.1.0-alpha.22"
   id("com.github.gmazzo.buildconfig") version "5.7.1"
 }
@@ -56,8 +56,8 @@ dependencies {
 
 java {
   withSourcesJar()
-  sourceCompatibility = JavaVersion.VERSION_21
-  targetCompatibility = JavaVersion.VERSION_21
+  sourceCompatibility = JavaVersion.VERSION_25
+  targetCompatibility = JavaVersion.VERSION_25
 }
 
 neoForge {
