@@ -6,7 +6,7 @@ plugins {
     id("net.neoforged.moddev") version "2.0.141" apply false
 }
 
-stonecutter active "26.2-fabric"
+stonecutter active "26.2-neoforge"
 
 stonecutter parameters {
     constants.match(node.metadata.project.substringAfterLast('-'), "fabric", "neoforge")
@@ -15,8 +15,8 @@ stonecutter parameters {
         constants[it] = node.project.hasProperty("deps.$it")
     }
 
-    replacements.string(current.parsed >= "1.21.11", "resource_location") {
-        replace("ResourceLocation", "Identifier")
-        replace("location()", "identifier()")
+    replacements.string(current.parsed <= "1.21.11", "identifier") {
+        replace("Identifier", "ResourceLocation")
+        replace("identifier()", "location()")
     }
 }

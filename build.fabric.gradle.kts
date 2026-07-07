@@ -42,12 +42,6 @@ dependencies {
 
   remoteDepBuilder(project, fletchingTable::modrinth)
     .dep("sodium") { modImplementation(it) }
-    .dep("iris") {
-      modRuntimeOnly(it)
-      runtimeOnly("org.antlr:antlr4-runtime:4.13.1")
-      runtimeOnly("io.github.douira:glsl-transformer:2.0.1")
-      runtimeOnly("org.anarres:jcpp:1.4.14")
-    }
 }
 
 java {

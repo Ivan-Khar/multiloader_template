@@ -1,5 +1,5 @@
 //? if fabric {
-package one.theaq.template.platform.fabric;
+/*package one.theaq.template.platform.fabric;
 
 import one.theaq.template.Template;
 import dev.kikugie.fletching_table.annotation.fabric.Entrypoint;
@@ -12,4 +12,4 @@ public final class FabricEntrypoint implements ModInitializer {
         Template.initialize();
     }
 }
-//?}
+*///?}

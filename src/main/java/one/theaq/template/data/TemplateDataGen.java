@@ -2,7 +2,7 @@ package one.theaq.template.data;
 
 //? if fabric {
 
-import dev.kikugie.fletching_table.annotation.fabric.Entrypoint;
+/*import dev.kikugie.fletching_table.annotation.fabric.Entrypoint;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 
@@ -14,30 +14,33 @@ public final class TemplateDataGen implements DataGeneratorEntrypoint {
 	
 	}
 }
-//?} else {
-/*
+*///?} else {
+
 import one.theaq.template.Template;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.data.DataGenerator;
-import net.minecraft.data.PackOutput;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 
-import java.util.concurrent.CompletableFuture;
-
 @EventBusSubscriber(modid = Template.MOD_ID)
 public final class TemplateDataGen {
 
+	//? if >= 1.21.4 {
 	@SubscribeEvent
 	public static void gatherServerData(GatherDataEvent.Server event) {
-	
+
 	}
 
 	@SubscribeEvent
 	public static void gatherClientData(GatherDataEvent.Client event) {
 
 	}
+	//?} else {
+	//
+	//@SubscribeEvent
+	//public static void gatherData(GatherDataEvent event) {
+	//
+	//}
+	//?}
 }
 
-*///?}
+//?}

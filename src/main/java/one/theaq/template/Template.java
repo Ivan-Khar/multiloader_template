@@ -1,6 +1,7 @@
 package one.theaq.template;
 
-import net.minecraft.resources.ResourceLocation;
+//~identifier
+import net.minecraft.resources.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,7 +13,7 @@ public class Template {
 		LOGGER.info("Template Initialized");
 	}
 
-	public static ResourceLocation location(String path) {
-		return ResourceLocation.fromNamespaceAndPath(MOD_ID, path);
+	public static Identifier location(String path) {
+		return Identifier.fromNamespaceAndPath(MOD_ID, path);
 	}
 }

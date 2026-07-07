@@ -23,8 +23,3 @@ license = "${mod_license}"
 [[dependencies.${mod_id}]]
     modId = "minecraft"
     type = "required"
-
-[[dependencies.${mod_id}]]
-    modId = "configurable"
-    type = "required"
-    versionRange = "[3.2.1,)"

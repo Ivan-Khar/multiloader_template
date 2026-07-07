@@ -32,25 +32,8 @@ base.archivesName = "${mod("id")}-${mod("version")}+$minecraft-$loader"
 
 dependencies {
   remoteDepBuilder(project, fletchingTable::modrinth)
-
-  deps("sodium_internal") {
-    val sodiumArtifact = "maven.modrinth:sodium:${deps("sodium")}"
-    listOf(
-      "sodium-neo-jar" to "META-INF/jarjar/net.caffeinemc.sodium-$it-mod.jar",
-    ).forEach { (attrName, nestedPath) ->
-      registerTransform(ExtractNestedJar::class.java) {
-        from.attribute(ArtifactTypeDefinition.ARTIFACT_TYPE_ATTRIBUTE, ArtifactTypeDefinition.JAR_TYPE)
-        to.attribute(ArtifactTypeDefinition.ARTIFACT_TYPE_ATTRIBUTE, attrName)
-        parameters { nestedJarPath.set(nestedPath) }
-      }
-      compileOnly(sodiumArtifact) {
-        attributes { attribute(ArtifactTypeDefinition.ARTIFACT_TYPE_ATTRIBUTE, attrName) }
-      }
-    }
-  }
-
   deps("sodium") {
-    compileOnly("maven.modrinth:sodium:$it")
+    implementation("maven.modrinth:sodium:$it")
   }
 }
 
