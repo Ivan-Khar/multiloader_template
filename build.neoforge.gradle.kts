@@ -21,7 +21,6 @@ repositories {
   maven("https://maven.blamejared.com/")
   maven("https://maven.shedaniel.me/")
   maven("https://thedarkcolour.github.io/KotlinForForge/")
-  maven("https://maven.parchmentmc.org")
 
   strictMaven("https://www.cursemaven.com", "Curseforge", "curse.maven")
   strictMaven("https://api.modrinth.com/maven", "Modrinth", "maven.modrinth")
@@ -38,8 +37,6 @@ dependencies {
     val sodiumArtifact = "maven.modrinth:sodium:${deps("sodium")}"
     listOf(
       "sodium-neo-jar" to "META-INF/jarjar/net.caffeinemc.sodium-$it-mod.jar",
-      "sodium-fapi-jar" to "META-INF/jarjar/fabric-api-base-${deps("sodium_fabric_api_base")}.jar",
-      "sodium-frapi-jar" to "META-INF/jarjar/fabric-renderer-api-${deps("sodium_fabric_renderer")}.jar"
     ).forEach { (attrName, nestedPath) ->
       registerTransform(ExtractNestedJar::class.java) {
         from.attribute(ArtifactTypeDefinition.ARTIFACT_TYPE_ATTRIBUTE, ArtifactTypeDefinition.JAR_TYPE)
@@ -54,10 +51,6 @@ dependencies {
 
   deps("sodium") {
     compileOnly("maven.modrinth:sodium:$it")
-  }
-
-  deps("configurable") {
-    implementation(annotationProcessor("com.bawnorton.configurable:configurable-$loader:$it")!!)
   }
 }
 
@@ -76,14 +69,6 @@ neoForge {
   mods {
     register(mod("id")!!) {
       sourceSet(sourceSets["main"])
-    }
-  }
-
-  deps("parchment") {
-    parchment {
-      val (mc, version) = it.split(':')
-      mappingsVersion = version
-      minecraftVersion = mc
     }
   }
 

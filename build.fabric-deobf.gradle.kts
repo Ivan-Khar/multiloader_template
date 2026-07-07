@@ -1,7 +1,6 @@
 @file:Suppress("UnstableApiUsage")
 
 import dev.kikugie.fletching_table.annotation.MixinEnvironment
-import org.gradle.kotlin.dsl.mappings
 import org.gradle.kotlin.dsl.remapJar
 import template.utils.*
 
@@ -35,9 +34,7 @@ base.archivesName = "${mod("id")}-${mod("version")}+$minecraft-$loader"
 
 dependencies {
   minecraft("com.mojang:minecraft:$minecraft")
-  mappings(loom.officialMojangMappings())
-
-  modImplementation("net.fabricmc:fabric-loader:0.17.3")
+  modImplementation("net.fabricmc:fabric-loader:0.19.3")
   modImplementation("net.fabricmc.fabric-api:fabric-api:${deps("fabric_api")}")
 
   remoteDepBuilder(project, fletchingTable::modrinth)

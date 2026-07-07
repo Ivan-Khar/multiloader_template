@@ -11,18 +11,20 @@ pluginManagement {
 }
 
 plugins {
-    id("dev.kikugie.stonecutter") version "0.8-alpha.7"
+    id("dev.kikugie.stonecutter") version "0.9.6"
 }
 
 stonecutter {
     create(rootProject) {
-        fun mc(mcVersion: String, name: String = mcVersion, loaders: Iterable<String>) =
-            loaders.forEach { vers("$name-$it", mcVersion).buildscript = "build.$it.gradle.kts" }
+        fun mc(mcVersion: String, name: String = mcVersion, deobfuscated: Boolean = false, loaders: Iterable<String>) =
+            loaders.forEach {
+                version("$name-$it", mcVersion).buildscript = "build.$it${if(deobfuscated && it == "fabric") "-deobf" else ""}.gradle.kts"
+            }
 
-        mc("1.21.8", loaders = listOf("fabric", "neoforge"))
-        mc("1.21.10", loaders = listOf("fabric", "neoforge"))
+        mc("1.21.1", loaders = listOf("fabric", "neoforge"))
+        mc("26.2", deobfuscated = true, loaders = listOf("fabric", "neoforge"))
 
-        vcsVersion = "1.21.10-fabric"
+        vcsVersion = "26.2-fabric"
     }
 }
 
