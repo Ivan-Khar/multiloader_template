@@ -85,34 +85,34 @@ neoForge {
       programArgument("--uuid=83d32844-e63e-4e24-a032-c0647c058de2")
     }
 
-//    if (sc.current.parsed.eq("26.2")) {
-//      register("serverData") {
-//        ideName = "NeoForge Server Datagen $minecraft"
-//        serverData()
-//        programArguments.addAll(
-//          "--mod", "${mod("id")}",
-//          "--output", project.file("src/main/generated/server").toString()
-//        )
-//      }
-//
-//      register("clientData") {
-//        ideName = "NeoForge Client Datagen $minecraft"
-//        data()
-//        programArguments.addAll(
-//          "--mod", "${mod("id")}",
-//          "--output", project.file("src/main/generated").toString()
-//        )
-//      }
-//    } else {
-//      register("data") {
-//        ideName = "NeoForge Datagen $minecraft"
-//        data()
-//        programArguments.addAll(
-//          "--mod", "${mod("id")}",
-//          "--output", project.file("src/main/generated").toString()
-//        )
-//      }
-//    }
+    if (sc.current.parsed >= "1.21.4") {
+      register("serverData") {
+        ideName = "NeoForge Server Datagen $minecraft"
+        serverData()
+        programArguments.addAll(
+          "--mod", "${mod("id")}",
+          "--output", project.file("src/main/generated/server").toString()
+        )
+      }
+
+      register("clientData") {
+        ideName = "NeoForge Client Datagen $minecraft"
+        clientData()
+        programArguments.addAll(
+          "--mod", "${mod("id")}",
+          "--output", project.file("src/main/generated").toString()
+        )
+      }
+    } else {
+      register("data") {
+        ideName = "NeoForge Datagen $minecraft"
+        data()
+        programArguments.addAll(
+          "--mod", "${mod("id")}",
+          "--output", project.file("src/main/generated").toString()
+        )
+      }
+    }
 
     register("server") {
       ideName = "NeoForge Server $minecraft"
