@@ -56,8 +56,13 @@ dependencies {
 
 java {
   withSourcesJar()
-  sourceCompatibility = JavaVersion.VERSION_25
-  targetCompatibility = JavaVersion.VERSION_25
+  if (sc.current.parsed >= "26.1") {
+    sourceCompatibility = JavaVersion.VERSION_25
+    targetCompatibility = JavaVersion.VERSION_25
+  } else {
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+  }
 }
 
 neoForge {

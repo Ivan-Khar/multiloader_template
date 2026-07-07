@@ -1,5 +1,3 @@
-import dev.kikugie.stonecutter.data.tree.ProjectNode
-
 plugins {
     kotlin("jvm") version "2.4.0" apply false
     id("dev.kikugie.stonecutter")
