@@ -54,7 +54,7 @@ java {
 }
 
 loom {
-  accessWidenerPath.set(rootProject.file("src/main/resources/$minecraft.deobf.accesswidener"))
+  accessWidenerPath.set(rootProject.file("src/main/resources/$minecraft.accesswidener"))
 
   fabricApi {
     configureDataGeneration {
