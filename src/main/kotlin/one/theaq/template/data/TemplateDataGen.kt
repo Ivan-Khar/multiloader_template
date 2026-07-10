@@ -6,7 +6,7 @@ import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator
 
 @Entrypoint("fabric-datagen")
-class TemplateDataGen: DataGeneratorEntrypoint {
+class TemplateDataGen : DataGeneratorEntrypoint {
     override fun onInitializeDataGenerator(fabricDataGenerator: FabricDataGenerator) {
 
     }

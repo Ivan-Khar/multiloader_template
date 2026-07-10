@@ -24,7 +24,7 @@ fun Project.applyMixinDebugSettings(vmArgConsumer: Consumer<String>, propertyCon
     propertyConsumer.accept("mixin.debug.export", "true")
 }
 
-fun Project.remoteDepBuilder(project: Project, depResolver: (String, String) -> Dependency) : RemoteDepBuilder {
+fun Project.remoteDepBuilder(project: Project, depResolver: (String, String) -> Dependency): RemoteDepBuilder {
     return RemoteDepBuilder(project, depResolver)
 }
 
@@ -33,12 +33,12 @@ class RemoteDepBuilder(private val project: Project, private val depResolver: (S
         project.extensions.extraProperties.get("minecraft") as String
     }
 
-    fun dep(id: String, version: String = minecraft, handler: (dep: Dependency) -> Unit) : RemoteDepBuilder {
-      try {
-        handler(depResolver(id, version))
-      } catch (e: Exception) {
-        project.logger.warn(e.message)
-      }
-      return this
+    fun dep(id: String, version: String = minecraft, handler: (dep: Dependency) -> Unit): RemoteDepBuilder {
+        try {
+            handler(depResolver(id, version))
+        } catch (e: Exception) {
+            project.logger.warn(e.message)
+        }
+        return this
     }
 }

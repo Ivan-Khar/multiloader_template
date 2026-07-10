@@ -18,7 +18,8 @@ stonecutter {
     create(rootProject) {
         fun mc(mcVersion: String, name: String = mcVersion, deobfuscated: Boolean = false, loaders: Iterable<String>) =
             loaders.forEach {
-                version("$name-$it", mcVersion).buildscript = "build.$it${if(deobfuscated && it == "fabric") "-deobf" else ""}.gradle.kts"
+                version("$name-$it", mcVersion).buildscript =
+                    "build.$it${if (deobfuscated && it == "fabric") "-deobf" else ""}.gradle.kts"
             }
 
         mc("1.21.1", loaders = listOf("fabric", "neoforge"))

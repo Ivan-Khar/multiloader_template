@@ -13,37 +13,37 @@ import java.io.File
 import java.util.jar.JarInputStream
 
 interface NestedJarParameters : TransformParameters {
-  @get:Input
-  val nestedJarPath: Property<String>
+    @get:Input
+    val nestedJarPath: Property<String>
 }
 
 abstract class ExtractNestedJar : TransformAction<NestedJarParameters> {
-  @get:InputArtifact
-  abstract val inputArtifact: Provider<FileSystemLocation>
+    @get:InputArtifact
+    abstract val inputArtifact: Provider<FileSystemLocation>
 
-  override fun transform(outputs: TransformOutputs) {
-    val inputJar = inputArtifact.get().asFile
-    val nestedPath = parameters.nestedJarPath.get()
+    override fun transform(outputs: TransformOutputs) {
+        val inputJar = inputArtifact.get().asFile
+        val nestedPath = parameters.nestedJarPath.get()
 
-    val outputJar = outputs.file(File(nestedPath).name)
+        val outputJar = outputs.file(File(nestedPath).name)
 
-    try {
-      JarInputStream(inputJar.inputStream().buffered()).use { jarStream ->
-        var entry = jarStream.nextJarEntry
-        while (entry != null) {
-          if (entry.name == nestedPath) {
-            outputJar.outputStream().buffered().use { outputStream ->
-              jarStream.copyTo(outputStream)
+        try {
+            JarInputStream(inputJar.inputStream().buffered()).use { jarStream ->
+                var entry = jarStream.nextJarEntry
+                while (entry != null) {
+                    if (entry.name == nestedPath) {
+                        outputJar.outputStream().buffered().use { outputStream ->
+                            jarStream.copyTo(outputStream)
+                        }
+                        return
+                    }
+                    entry = jarStream.nextJarEntry
+                }
             }
-            return
-          }
-          entry = jarStream.nextJarEntry
+        } catch (e: Exception) {
+            throw GradleException("Failed to transform $inputJar: ${e.message}", e)
         }
-      }
-    } catch (e: Exception) {
-      throw GradleException("Failed to transform $inputJar: ${e.message}", e)
-    }
 
-    throw GradleException("Could not find nested jar '$nestedPath' in '$inputJar'.")
-  }
+        throw GradleException("Could not find nested jar '$nestedPath' in '$inputJar'.")
+    }
 }
