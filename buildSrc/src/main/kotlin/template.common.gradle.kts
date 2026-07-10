@@ -32,6 +32,7 @@ tasks {
             "mod_name" to mod("name"),
             "mod_version" to mod("version"),
             "mod_description" to mod("description"),
+            "mod_author" to mod("author"),
             "mod_license" to mod("license"),
             "minecraft_version" to minecraft
         )

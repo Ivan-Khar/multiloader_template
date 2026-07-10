@@ -5,7 +5,7 @@
   "version": "${mod_version}",
   "description": "${mod_description}",
   "authors": [
-    "leIvan"
+    "${mod_author}"
   ],
   "contact": {
     "homepage": "https://github.com/Ivan-Khar/${mod_name}",
@@ -15,6 +15,20 @@
   "icon": "assets/${mod_id}/icon.png",
   "license": "${mod_license}",
   "environment": "*",
+  "entrypoints": {
+    "main": [
+      {
+        "adapter": "kotlin",
+        "value": "one.theaq.template.platform.fabric.FabricEntrypoint"
+      }
+    ],
+    "client": [
+      {
+        "adapter": "kotlin",
+        "value": "one.theaq.template.client.platform.fabric.FabricClientEntrypoint"
+      }
+    ]
+  },
   "accessWidener": "${minecraft_version}.accesswidener",
   "depends": {
     "minecraft": "~${minecraft_version}",

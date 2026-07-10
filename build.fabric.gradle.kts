@@ -24,6 +24,7 @@ repositories {
   maven("https://maven.quiltmc.org/repository/release/")
   maven("https://maven.blamejared.com/")
   maven("https://maven.shedaniel.me/")
+  maven("https://maven.parchmentmc.org")
 
   strictMaven("https://www.cursemaven.com", "Curseforge", "curse.maven")
   strictMaven("https://api.modrinth.com/maven", "Modrinth", "maven.modrinth")
@@ -35,10 +36,16 @@ base.archivesName = "${mod("id")}-${mod("version")}+$minecraft-$loader"
 
 dependencies {
   minecraft("com.mojang:minecraft:$minecraft")
-  mappings(loom.officialMojangMappings())
+  mappings(loom.layered {
+    officialMojangMappings()
+    if (sc.current.parsed < "26.0") deps("parchment") {
+      parchment("org.parchmentmc.data:parchment-$it@zip")
+    }
+  })
 
   modImplementation("net.fabricmc:fabric-loader:0.17.3")
   modImplementation("net.fabricmc.fabric-api:fabric-api:${deps("fabric_api")}")
+  modImplementation("net.fabricmc:fabric-language-kotlin:${deps("fabric-language-kotlin")}")
 
   remoteDepBuilder(project, fletchingTable::modrinth)
     .dep("sodium") { modImplementation(it) }
@@ -48,6 +55,10 @@ java {
   withSourcesJar()
   sourceCompatibility = JavaVersion.VERSION_21
   targetCompatibility = JavaVersion.VERSION_21
+}
+
+kotlin {
+  jvmToolchain(21)
 }
 
 loom {
@@ -65,6 +76,11 @@ loom {
       eula = true
       clearRunDirectory = false
     }
+  }
+
+  //https://github.com/NikitaCartes/EasyAuth/blob/stonecutter/build.fabric-deobf.gradle.kts#L51-L53
+  decompilerOptions.named("vineflower") {
+    options.put("mark-corresponding-synthetics", "1") // Adds names to lambdas - useful for mixins
   }
 
   runConfigs.all {

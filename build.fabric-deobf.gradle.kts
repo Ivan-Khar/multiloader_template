@@ -36,6 +36,7 @@ dependencies {
 
   implementation("net.fabricmc:fabric-loader:0.19.3")
   implementation("net.fabricmc.fabric-api:fabric-api:${deps("fabric_api")}")
+  implementation("net.fabricmc:fabric-language-kotlin:${deps("fabric-language-kotlin")}")
 
   remoteDepBuilder(project, fletchingTable::modrinth)
     .dep("sodium") { implementation(it) }
@@ -45,6 +46,10 @@ java {
   withSourcesJar()
   sourceCompatibility = JavaVersion.VERSION_25
   targetCompatibility = JavaVersion.VERSION_25
+}
+
+kotlin {
+  jvmToolchain(25)
 }
 
 loom {
@@ -62,6 +67,11 @@ loom {
       eula = true
       clearRunDirectory = false
     }
+  }
+
+  //https://github.com/NikitaCartes/EasyAuth/blob/stonecutter/build.fabric-deobf.gradle.kts#L51-L53
+  decompilerOptions.named("vineflower") {
+    options.put("mark-corresponding-synthetics", "1") // Adds names to lambdas - useful for mixins
   }
 
   runConfigs.all {

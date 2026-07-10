@@ -1,5 +1,5 @@
-modLoader = "javafml"
-loaderVersion = "[2,)"
+modLoader = "kotlinforforge"
+loaderVersion = "[1,)"
 issueTrackerURL = "https://github.com/Ivan-Khar/${mod_name}/issues"
 license = "${mod_license}"
 
@@ -9,7 +9,7 @@ license = "${mod_license}"
     displayName = "${mod_name}"
     logoFile = "assets/${mod_id}/logo.png"
     description = '''${mod_description}'''
-    authors = "leIvan"
+    authors = "${mod_author}"
 
 [[accessTransformers]]
     file="${minecraft_version}-accesstransformer.cfg"

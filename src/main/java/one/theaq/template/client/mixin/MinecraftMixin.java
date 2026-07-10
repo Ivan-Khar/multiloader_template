@@ -6,6 +6,6 @@ import org.spongepowered.asm.mixin.Mixin;
 
 @MixinEnvironment(value = "client")
 @Mixin(Minecraft.class)
-public class ExampleClientMixin {
+public class MinecraftMixin {
 
 }

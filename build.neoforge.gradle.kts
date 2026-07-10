@@ -21,6 +21,7 @@ repositories {
   maven("https://maven.blamejared.com/")
   maven("https://maven.shedaniel.me/")
   maven("https://thedarkcolour.github.io/KotlinForForge/")
+  maven("https://maven.parchmentmc.org")
 
   strictMaven("https://www.cursemaven.com", "Curseforge", "curse.maven")
   strictMaven("https://api.modrinth.com/maven", "Modrinth", "maven.modrinth")
@@ -32,6 +33,8 @@ base.archivesName = "${mod("id")}-${mod("version")}+$minecraft-$loader"
 
 dependencies {
   remoteDepBuilder(project, fletchingTable::modrinth)
+
+  deps("kotlinforforge-neoforge") { runtimeOnly("thedarkcolour:kotlinforforge-neoforge:${it}") }
   deps("sodium") {
     implementation("maven.modrinth:sodium:$it")
   }
@@ -39,13 +42,12 @@ dependencies {
 
 java {
   withSourcesJar()
-  if (sc.current.parsed >= "26.1") {
-    sourceCompatibility = JavaVersion.VERSION_25
-    targetCompatibility = JavaVersion.VERSION_25
-  } else {
-    sourceCompatibility = JavaVersion.VERSION_21
-    targetCompatibility = JavaVersion.VERSION_21
-  }
+  sourceCompatibility = if(sc.current.parsed >= "26.0") JavaVersion.VERSION_25 else JavaVersion.VERSION_21
+  targetCompatibility = if(sc.current.parsed >= "26.0") JavaVersion.VERSION_25 else JavaVersion.VERSION_21
+}
+
+kotlin {
+  jvmToolchain(if(sc.current.parsed >= "26.0") 25 else 21)
 }
 
 neoForge {
@@ -57,6 +59,16 @@ neoForge {
   mods {
     register(mod("id")!!) {
       sourceSet(sourceSets["main"])
+    }
+  }
+
+  if (sc.current.parsed < "26.0") {
+    deps("parchment") {
+      parchment {
+        val (mc, version) = it.split(':')
+        mappingsVersion = version
+        minecraftVersion = mc
+      }
     }
   }
 
