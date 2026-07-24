@@ -8,7 +8,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator
 @Entrypoint("fabric-datagen")
 class TemplateDataGen : DataGeneratorEntrypoint {
     override fun onInitializeDataGenerator(fabricDataGenerator: FabricDataGenerator) {
-
+        val pack = fabricDataGenerator.createPack()
     }
 }
 //?} else {
